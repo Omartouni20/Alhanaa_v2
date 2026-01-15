@@ -1,12 +1,12 @@
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
-import { AnimatePresence, motion } from 'motion/react';
-import { Navbar } from '@/app/components/navbar';
-import { Footer } from '@/app/components/footer';
-import { HomePage } from '@/app/pages/home';
-import { AboutPage } from '@/app/pages/about';
-import { ProductsPage } from '@/app/pages/products';
-import { CertificatesPage } from '@/app/pages/certificates';
-import { ContactPage } from '@/app/pages/contact';
+import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { AnimatePresence, motion } from "motion/react";
+import { Navbar } from "@/app/components/navbar";
+import { Footer } from "@/app/components/footer";
+import { HomePage } from "@/app/pages/home";
+import { AboutPage } from "@/app/pages/about";
+import { ProductsPage } from "@/app/pages/products";
+import { CertificatesPage } from "@/app/pages/certificates";
+import { ContactPage } from "@/app/pages/contact";
 
 function AnimatedRoutes() {
   const location = useLocation();
