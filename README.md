@@ -1,7 +1,6 @@
 
-  # UI Design Guidelines
+  # ALhanaa
 
-  This is a code bundle for UI Design Guidelines. The original project is available at https://www.figma.com/design/cKiYNZfYRnGMIHeAert53w/UI-Design-Guidelines.
 
   ## Running the code
 
