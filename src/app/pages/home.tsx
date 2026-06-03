@@ -429,7 +429,7 @@ export function HomePage() {
           </ScrollReveal>
 
           <ScrollReveal delay={0.2}>
-            <div className="max-w-6xl mx-auto w-full overflow-hidden">
+<div className="max-w-6xl mx-auto w-full overflow-visible">
               <Slider {...productsSliderSettings}>
                 {products.map((product, index) => (
                   <div key={index} className="px-3 pb-6">

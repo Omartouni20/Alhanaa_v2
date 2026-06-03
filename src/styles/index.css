@@ -26,3 +26,31 @@ html {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--chart-3);
 }
+
+
+.slick-slider,
+.slick-list,
+.slick-track {
+  width: 100%;
+}
+
+.slick-slide > div {
+  width: 100%;
+}
+
+.slick-slide img {
+  display: block;
+  width: 100%;
+}
+
+.slick-track {
+  display: flex !important;
+}
+
+.slick-slide {
+  height: inherit !important;
+}
+
+.slick-slide > div {
+  height: 100%;
+}
