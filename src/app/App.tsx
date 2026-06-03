@@ -1,5 +1,7 @@
 import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 import { AnimatePresence, motion } from "motion/react";
+
 import { Navbar } from "@/app/components/navbar";
 import { Footer } from "@/app/components/footer";
 import { HomePage } from "@/app/pages/home";
@@ -7,6 +9,34 @@ import { AboutPage } from "@/app/pages/about";
 import { ProductsPage } from "@/app/pages/products";
 import { CertificatesPage } from "@/app/pages/certificates";
 import { ContactPage } from "@/app/pages/contact";
+
+function ScrollToTop() {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "auto",
+    });
+  }, [location.pathname]);
+
+  return null;
+}
+
+function PageTransition({ children }: { children: React.ReactNode }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.3 }}
+      className="w-full max-w-full overflow-x-hidden"
+    >
+      {children}
+    </motion.div>
+  );
+}
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -17,66 +47,45 @@ function AnimatedRoutes() {
         <Route
           path="/"
           element={
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-            >
+            <PageTransition>
               <HomePage />
-            </motion.div>
+            </PageTransition>
           }
         />
+
         <Route
           path="/about"
           element={
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-            >
+            <PageTransition>
               <AboutPage />
-            </motion.div>
+            </PageTransition>
           }
         />
+
         <Route
           path="/products"
           element={
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-            >
+            <PageTransition>
               <ProductsPage />
-            </motion.div>
+            </PageTransition>
           }
         />
+
         <Route
           path="/certificates"
           element={
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-            >
+            <PageTransition>
               <CertificatesPage />
-            </motion.div>
+            </PageTransition>
           }
         />
+
         <Route
           path="/contact"
           element={
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.3 }}
-            >
+            <PageTransition>
               <ContactPage />
-            </motion.div>
+            </PageTransition>
           }
         />
       </Routes>
@@ -87,11 +96,17 @@ function AnimatedRoutes() {
 export default function App() {
   return (
     <Router>
-      <div className="min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-1">
+      <ScrollToTop />
+
+      <div className="min-h-screen flex flex-col w-full max-w-full overflow-x-hidden">
+        <header className="fixed top-0 left-0 right-0 z-[9999] w-full">
+          <Navbar />
+        </header>
+
+        <main className="flex-1 w-full max-w-full overflow-x-hidden pt-20">
           <AnimatedRoutes />
         </main>
+
         <Footer />
       </div>
     </Router>
