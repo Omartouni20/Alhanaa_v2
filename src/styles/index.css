@@ -27,30 +27,30 @@ html {
   background: var(--chart-3);
 }
 
-
 .slick-slider,
 .slick-list,
 .slick-track {
   width: 100%;
 }
 
-.slick-slide > div {
-  width: 100%;
-}
-
-.slick-slide img {
-  display: block;
-  width: 100%;
+.slick-list {
+  overflow: hidden;
 }
 
 .slick-track {
   display: flex !important;
+  align-items: stretch;
 }
 
 .slick-slide {
-  height: inherit !important;
+  height: auto !important;
 }
 
 .slick-slide > div {
   height: 100%;
+}
+
+/* مهم: ما تجبرش كل صور السلايدر تبقى width 100% */
+.slick-slide img {
+  display: block;
 }

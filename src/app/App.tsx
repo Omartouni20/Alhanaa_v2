@@ -1,14 +1,39 @@
 import { HashRouter as Router, Routes, Route, useLocation } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, lazy, Suspense } from "react";
 import { AnimatePresence, motion } from "motion/react";
 
 import { Navbar } from "@/app/components/navbar";
 import { Footer } from "@/app/components/footer";
-import { HomePage } from "@/app/pages/home";
-import { AboutPage } from "@/app/pages/about";
-import { ProductsPage } from "@/app/pages/products";
-import { CertificatesPage } from "@/app/pages/certificates";
-import { ContactPage } from "@/app/pages/contact";
+
+const HomePage = lazy(() =>
+  import("@/app/pages/home").then((module) => ({
+    default: module.HomePage,
+  }))
+);
+
+const AboutPage = lazy(() =>
+  import("@/app/pages/about").then((module) => ({
+    default: module.AboutPage,
+  }))
+);
+
+const ProductsPage = lazy(() =>
+  import("@/app/pages/products").then((module) => ({
+    default: module.ProductsPage,
+  }))
+);
+
+const CertificatesPage = lazy(() =>
+  import("@/app/pages/certificates").then((module) => ({
+    default: module.CertificatesPage,
+  }))
+);
+
+const ContactPage = lazy(() =>
+  import("@/app/pages/contact").then((module) => ({
+    default: module.ContactPage,
+  }))
+);
 
 function ScrollToTop() {
   const location = useLocation();
@@ -27,14 +52,22 @@ function ScrollToTop() {
 function PageTransition({ children }: { children: React.ReactNode }) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.3 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
       className="w-full max-w-full overflow-x-hidden"
     >
       {children}
     </motion.div>
+  );
+}
+
+function PageLoader() {
+  return (
+    <div className="min-h-[60vh] flex items-center justify-center">
+      <p className="text-muted-foreground">Loading...</p>
+    </div>
   );
 }
 
@@ -104,7 +137,9 @@ export default function App() {
         </header>
 
         <main className="flex-1 w-full max-w-full overflow-x-hidden pt-20">
-          <AnimatedRoutes />
+          <Suspense fallback={<PageLoader />}>
+            <AnimatedRoutes />
+          </Suspense>
         </main>
 
         <Footer />
